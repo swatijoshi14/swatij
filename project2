@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.18;
+
+contract MyToken {
+
+    // Public variables
+    string public name = "MyCustomToken";
+    string public symbol = "MCT";
+    uint public totalSupply = 0;
+
+    // Mapping to track balances
+    mapping (address => uint) public balances;
+
+    // Function to mint new tokens
+    function mintTokens(address _address, uint _value) public {
+        totalSupply += _value;
+        balances[_address] += _value;
+    }
+
+    // Function to burn tokens
+    function burnTokens(address _address, uint _value) public {
+        require(balances[_address] >= _value, "Insufficient balance");
+        
+        totalSupply -= _value;
+        balances[_address] -= _value;
+    }
+
+}
